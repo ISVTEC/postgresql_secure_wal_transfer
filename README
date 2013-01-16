@@ -1,0 +1,6 @@
+(
+  echo -n 'command="/usr/local/bin/postgresql_secure_wal_transfer",from="5.39.90.13",no-agent-forwarding,no-port-forwarding,no-X11-forwarding,no-pty '
+  cat ~postgres/.ssh/id_rsa.pub
+) > ~postgres/.ssh/authorized_keys
+
+echo -e "9.2\nb\nc" | sudo -u postgres ssh $primary
