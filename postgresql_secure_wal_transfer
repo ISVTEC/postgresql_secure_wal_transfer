@@ -15,11 +15,11 @@
 # this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-pg_version=$1
-cluster_name=$2
-wal_file=$3
-
 set -e -o pipefail -o nounset
+
+read pg_version
+read cluster_name
+read wal_file
 
 function usage() {
     echo "$0: PG_VERSION CLUSTER_NAME WAL_FILE" >&2
