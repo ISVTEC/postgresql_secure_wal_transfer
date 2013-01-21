@@ -17,6 +17,10 @@
 
 set -e -o pipefail -o nounset
 
+tempfile=$(tempfile)
+
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+
 wal_file=$1
 output_file=$2
 version=$3
@@ -25,4 +29,6 @@ primary=$5
 
 echo "$version
 $cluster_name
-$wal_file" | ssh -T $primary | pigz -d > $output_file
+$wal_file" | ssh -T $primary | pigz -d > $tempfile
+
+mv $tempfile $output_file
