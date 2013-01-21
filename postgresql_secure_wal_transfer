@@ -50,7 +50,7 @@ then
 fi
 
 # Check wal_file
-if ! echo "$wal_file" | grep -qE "^[A-Z0-9\.]+$"
+if ! echo "$wal_file" | grep -qEi "^[A-Z0-9\.]+$"
 then
     echo "$0: invalid WAL file name $wal_file" >&2
     usage
