@@ -19,13 +19,16 @@ set -e -o pipefail -o nounset
 
 tempfile=$(tempfile)
 
-trap "rm -f $tempfile" EXIT HUP INT TRAP TERM
+trap "rm -f $tempfile" EXIT HUP INT TRAP TERM ALRM
 
 wal_file=$1
 output_file=$2
 version=$3
 cluster_name=$4
 primary=$5
+
+# Start 30 second timeout
+sleep 30 && kill -s ALRM $$ &
 
 echo "$version
 $cluster_name
